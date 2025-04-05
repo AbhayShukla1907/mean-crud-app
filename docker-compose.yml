@@ -1,0 +1,25 @@
+version: "3"
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+    environment:
+      - MONGO_URL=mongodb+srv://abhay06072002:D0fiQ4heOhotB5Wq@abhaycluster.xfyr2p6.mongodb.net/tmbatch7
+
+  frontend:
+    build:
+      context: ./frontend/frontend-app
+      dockerfile: Dockerfile
+    ports:
+      - "4200:80"
+
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+
