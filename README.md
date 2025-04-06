@@ -188,6 +188,12 @@ volumes:
 ```bash
 docker-compose up --build
 ```
+![Screenshot 2025-04-06 101539](https://github.com/user-attachments/assets/37a3c43e-09f4-41dc-9821-ee673f52f29b)
+
+![Screenshot 2025-04-06 101434](https://github.com/user-attachments/assets/e595e0e0-1963-449e-b38f-7a31fb870931)
+
+
+
 
 - Backend → [http://localhost:3000/tasks](http://localhost:3000/tasks)
 - ![Screenshot 2025-04-05 231013](https://github.com/user-attachments/assets/c8229363-98a1-4680-bf9a-72d8b48f60cf)
@@ -203,7 +209,7 @@ docker-compose up --build
 
 ```bash
 git init
-git remote add origin https://github.com/YourUsername/mean-crud-app.git
+git remote add origin https://github.com/AbhayShukla1907/mean-crud-app.git
 git add .
 git commit -m "Initial commit"
 git pull origin main --allow-unrelated-histories
@@ -271,7 +277,7 @@ Go to your GitHub repo → Settings → Secrets → Actions
 1. SSH into VM:
 
 ```bash
-ssh -i ~/.ssh/Vm_Key.pem ubuntu@<YOUR_PUBLIC_IP>
+ssh -i ~/.ssh/Vm_Key.pem ubuntu@54.201.67.167
 ```
 
 2. Install Nginx:
@@ -280,6 +286,9 @@ ssh -i ~/.ssh/Vm_Key.pem ubuntu@<YOUR_PUBLIC_IP>
 sudo apt update
 sudo apt install nginx
 ```
+![Screenshot 2025-04-06 130100](https://github.com/user-attachments/assets/a689320e-d4e4-41d5-bf8a-143ce4677fd1)
+
+![Screenshot 2025-04-06 130158](https://github.com/user-attachments/assets/cdb609af-c9f6-468e-98b5-e0d258724a6e)
 
 3. Create Nginx config:
 
@@ -293,7 +302,7 @@ Paste:
 server {
     listen 80;
 
-    server_name <YOUR_PUBLIC_IP>;
+    server_name 54.201.67.167;
 
     location / {
         proxy_pass http://localhost:4200;
@@ -304,6 +313,8 @@ server {
     }
 }
 ```
+![Screenshot 2025-04-06 134857](https://github.com/user-attachments/assets/a76c6a73-5e7b-4346-93bf-143f2e87999d)
+
 
 4. Enable the site:
 
@@ -313,6 +324,7 @@ sudo nginx -t
 sudo systemctl restart nginx
 
 ```
+![Screenshot 2025-04-06 133247](https://github.com/user-attachments/assets/078af194-9e1a-434a-923a-733a8cfcabda)
 
 
 ## ✅ Done 🎉
