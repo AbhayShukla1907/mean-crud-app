@@ -223,10 +223,120 @@ cd ../..
 git add .
 git commit -m "Removed embedded git"
 ```
+## ✅ Step 7: CI/CD with GitHub Actions
+
+Create `.github/workflows/deploy.yml`:
+
+```yaml
+name: Deploy to VM
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.VM_KEY }}
+
+      - name: Copy files to VM
+        run: |
+          ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.VM_HOST }} << 'EOF'
+            cd mean-crud-app
+            git pull origin main
+            docker-compose down
+            docker-compose up --build -d
+          EOF
+```
+
+### 🔐 Set GitHub Secrets:
+
+Go to your GitHub repo → Settings → Secrets → Actions
+
+- `VM_HOST`: Public IP of your VM  
+- `VM_KEY`: Paste content of your private `.pem` key (e.g., `cat ~/.ssh/Vm_Key.pem`)
 
 ---
 
-## Done ✅
+## ✅ Step 8: Nginx Reverse Proxy (on VM)
 
-You now have a fully containerized MEAN CRUD app, versioned in GitHub, and running via Docker!
+1. SSH into VM:
+
+```bash
+ssh -i ~/.ssh/Vm_Key.pem ubuntu@<YOUR_PUBLIC_IP>
+```
+
+2. Install Nginx:
+
+```bash
+sudo apt update
+sudo apt install nginx
+```
+
+3. Create Nginx config:
+
+```bash
+sudo nano /etc/nginx/sites-available/mean-crud-app
+```
+
+Paste:
+
+```nginx
+server {
+    listen 80;
+
+    server_name <YOUR_PUBLIC_IP>;
+
+    location / {
+        proxy_pass http://localhost:4200;
+    }
+
+    location /api {
+        proxy_pass http://localhost:3000;
+    }
+}
+```
+
+4. Enable the site:
+
+```bash
+sudo ln -s /etc/nginx/sites-available/mean-crud-app /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl restart nginx
+
+```
+
+
+## ✅ Done 🎉
+
+You now have:
+
+- MEAN stack CRUD app  
+- Dockerized with Docker Compose  
+- GitHub repo versioning  
+- CI/CD with GitHub Actions  
+- Reverse proxy with Nginx on VM
+
+
+---
+
+## 👨‍💻 Author
+
+**Abhay Kumar Shukla**
+
+- [GitHub](https://github.com/AbhayShukla1907)
+- [LinkedIn](https://www.linkedin.com/in/abhay-kumar-shukla-65818330a/)
+
+---
+
+
+
 
