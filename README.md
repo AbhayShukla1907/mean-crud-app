@@ -196,11 +196,11 @@ docker-compose up --build
 
 
 - Backend → [http://localhost:3000/tasks](http://localhost:3000/tasks)
-- ![Screenshot 2025-04-05 231013](https://github.com/user-attachments/assets/c8229363-98a1-4680-bf9a-72d8b48f60cf)
-
-
 - Frontend → [http://localhost:4200](http://localhost:4200)
-- ![Screenshot 2025-04-05 223246](https://github.com/user-attachments/assets/256aa75d-4dbf-4637-9e5f-3a23df9c5734)
+
+  ![Screenshot 2025-04-05 231013](https://github.com/user-attachments/assets/c4db0d6f-918a-4715-9623-f2adea57ea15)
+
+ ![Screenshot 2025-04-05 223246](https://github.com/user-attachments/assets/256aa75d-4dbf-4637-9e5f-3a23df9c5734)
 
 
 ---
